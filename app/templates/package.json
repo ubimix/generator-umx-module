@@ -1,0 +1,22 @@
+{
+    "name": "<%= _.slugify(appname) %>",
+    "version": "0.0.0",
+    "main" : "src",
+    "licenses" : [ {
+        "type" : "MIT"
+    } ],
+    "contributors" : [ ],
+    "dependencies" : { },
+    "devDependencies" : {
+        "mocha" : "*",
+        "expect.js" : "*",
+        "grunt" : "^0.4.5",
+        "grunt-contrib-jshint" : "^0.10.0",
+        "grunt-contrib-uglify" : "~0.4.0",
+        "grunt-contrib-concat" : "^0.4.0",
+        "grunt-mocha-test" : "^0.11.0"
+    },
+    "scripts" : {
+        "test" : "mocha -R spec ./test/spec_*"
+    }
+}

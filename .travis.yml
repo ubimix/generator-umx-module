@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - '0.10'
+before_install:
+  - currentfolder=${PWD##*/}
+  - if [ "$currentfolder" != 'generator-umx-module' ]; then cd .. && eval "mv $currentfolder generator-umx-module" && cd generator-umx-module; fi
+
