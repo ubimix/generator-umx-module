@@ -15,31 +15,27 @@ module.exports = function(grunt) {
         licenses = ' | License: ' + licenses + ' ';
     }
     var banner = '<%= pkg.name %> v<%= pkg.version %>' + licenses;
+
+    var webpackConfig = {
+        entry : './src/index',
+        output : {
+            path : './dist',
+            filename : pkg.name + '.js',
+            library : pkg.name,
+            libraryTarget : 'umd'
+        }
+    };
+    var webpackConfigMin = JSON.parse(JSON.stringify(webpackConfig));
+    webpackConfigMin.output.filename = pkg.name + '.min.js';
+    webpackConfig.plugins = [ new BannerPlugin(banner) ];
+    // Every non-relative module is external
+    webpackConfig.externals = webpackConfigMin.externals = [ /^[a-z\-0-9]+$/ ];
+
     grunt.initConfig({
         pkg : pkg,
         webpack : {
-            main : {
-                entry : './src/index',
-                output : {
-                    path : './dist',
-                    filename : pkg.name + '.js',
-                    library : pkg.name,
-                    libraryTarget : 'umd',
-                    sourcePrefix : ''
-                },
-                plugins : [ new BannerPlugin(banner) ]
-            },
-            minified : {
-                entry : './src/index',
-                output : {
-                    // optimize-minimize option
-                    path : './dist',
-                    filename : pkg.name + '.min.js',
-                    library : pkg.name,
-                    libraryTarget : 'umd',
-                    sourcePrefix : ''
-                }
-            }
+            main : webpackConfig,
+            minified : webpackConfigMin
         },
         bump : {
             options : {
