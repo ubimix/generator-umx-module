@@ -23,7 +23,10 @@ module.exports = function(grunt) {
             filename : pkg.name + '.js',
             library : pkg.name,
             libraryTarget : 'umd'
-        }
+        },
+        resolve : {
+            modulesDirectories : [ "node_modules" /* nodejs */, "libs" /* bower */]
+        },
     };
     var webpackConfigMin = JSON.parse(JSON.stringify(webpackConfig));
     webpackConfigMin.output.filename = pkg.name + '.min.js';

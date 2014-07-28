@@ -54,8 +54,7 @@ var UmxModuleGenerator = yeoman.generators.Base.extend({
     },
 
     projectfiles : function() {
-        _.each([ '.bowerrc', '.gitignore', 'Gruntfile.js', '.editorconfig',
-                '.jshintrc' ], function(file) {
+        _.each([ '.bowerrc', '.gitignore', 'Gruntfile.js' ], function(file) {
             var content = this.src.read(file);
             this.write(file, content);
         }, this);
