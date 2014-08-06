@@ -3,6 +3,7 @@ module.exports = function(grunt) {
     var configurator = new UmxGruntConfig(require, grunt);
     configurator.initBump();
     configurator.initWebpack();
+    configurator.initWatch();
     configurator.initJshint();
     configurator.initMochaTest();
     configurator.initUglify();
