@@ -1,0 +1,24 @@
+{
+    "name": "<%= _.slugify(appname) %>",
+  	"version": "0.0.0",
+    "main" : "app/js",
+    "dependencies" : {
+        "bootstrap" : "*",
+        "font-awesome" : "*",
+        "jquery" : "*",
+        "underscore" : "*",
+        "leaflet" : "*",
+        "leaflet.markercluster" : "*",
+        "requirejs": "*",
+        "text" : "*",
+        "eventemitter2" : "*",
+        "mosaic-commons": "*",
+        "mosaic-teleport": "*",
+        "superagent" : "*",
+        "react" : "*"
+    },
+    "devDependencies": {
+        "mocha": "^1.21.3",
+        "expect" : "*"
+    }
+}

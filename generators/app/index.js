@@ -7,8 +7,13 @@ var chalk = require('chalk');
 var _ = require('underscore');
 
 var UmxModuleGenerator = yeoman.generators.Base.extend({
+
+    constructor : function() {
+        yeoman.generators.Base.apply(this, arguments);
+    },
+
     init : function() {
-        this.pkg = require('../package.json');
+        this.pkg = require('../../package.json');
 
         this.argument('appname', {
             type : String,
@@ -26,28 +31,19 @@ var UmxModuleGenerator = yeoman.generators.Base.extend({
 
     askFor : function() {
         var done = this.async();
-
-        // Have Yeoman greet the user.
-        this.log(yosay('Welcome to the marvelous UmxModule generator!'));
-
-        // var prompts = [ {
-        // type : 'confirm',
-        // name : 'someOption',
-        // message : 'Would you like to enable this option?',
-        // 'default' : true
-        // } ];
-        // this.prompt(prompts, function(props) {
-        // this.someOption = props.someOption;
-        // done();
-        // }.bind(this));
+        this.log(yosay('Welcome to the UmxModule generator!'));
         done();
     },
 
     app : function() {
-        _.each([ 'src', 'test' ], function(dir) {
+        _.each([ 'app', 'test' ], function(dir) {
+            if (dir.match('^.*\/(node_modules|libs)$'))
+                return;
             this.mkdir(dir);
             this.src.recurse(dir, function(abspath, rootdir, subdir, filename) {
-                var p = path.join(dir, (subdir || ''), filename);
+                console.log(' * ', dir, abspath, rootdir, subdir, filename);
+                var p = path.join(dir, (subdir || ''));
+                p = path.join(p, filename);
                 this.template(p, p);
             }.bind(this));
         }.bind(this));
@@ -60,7 +56,7 @@ var UmxModuleGenerator = yeoman.generators.Base.extend({
         }, this);
 
         _.each([ '.project', 'package.json', 'bower.json', 'LICENSE',
-                'README.md' ], function(file) {
+                'README.md', 'server.js' ], function(file) {
             this.template(file, file);
         }, this);
     }
